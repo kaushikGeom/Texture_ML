@@ -86,8 +86,8 @@ for k =1 : Int(size(files_PA,1)/2)
       ymin=minimum(points[2,:]);
       ymax=maximum(points[2,:])
       im=im_PA[Int.(ymin:ymax),Int.(xmin:xmax)]
-      textures[ind]=Texture(1, im )
-      textures[ind]=Texture(3,im_PA )
+      textures[ind]=Texture(3, im )
+      
       
 end
 
