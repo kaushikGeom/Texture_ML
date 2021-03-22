@@ -66,7 +66,7 @@ for j =1 : Int(size(files_EH,1)/2)
       ymin=minimum(points[2,:]);
       ymax=maximum(points[2,:])
       im=im_EH[Int.(ymin:ymax),Int.(xmin:xmax)]
-      textures[ind]=Texture(1, im )
+      textures[ind]=Texture(2, im )
       
       
 end
