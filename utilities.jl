@@ -13,9 +13,9 @@ end
 
 function prepare_data_classification(path)
 
-path1=path*"controls//"
-path2=path*"EH//" 
-path3=path*"PA//"
+path1=path*"Poly_Controls//"
+path2=path*"Poly_EH//" 
+path3=path*"Poly_PA//"
 
 files_controls=readdir(path1)
 files_EH=readdir(path2)
@@ -23,15 +23,18 @@ files_PA=readdir(path3)
 
 
 # Size of the database
-tsize=Int( (size(files_controls,1) + size(files_EH,1) +size(files_PA,1))/2)
+#tsize=Int( (size(files_controls,1) + size(files_EH,1) +size(files_PA,1))/2)
 
 textures = Array{Texture, 1}(undef, tsize) # 
 #textures=Array{Texture, 1}(undef, )
 # initialize the array elements using new constructor
 
+f_bmp=filter(x -> endswith(x, ".bmp"), files_controls)
+f_txt=filter(x -> endswith(x, ".txt"), files_controls)
+
 ind=0
 
-for i =1 : Int(size(files_controls,1)/2)
+for i =1 : length(f_bmp)
 
      ind=ind+1
      im_controls=load(path1*files_controls[i])
@@ -51,7 +54,10 @@ for i =1 : Int(size(files_controls,1)/2)
     
 end
 
-for j =1 : Int(size(files_EH,1)/2)
+f_bmp=filter(x -> endswith(x, ".bmp"), files_EH)
+f_txt=filter(x -> endswith(x, ".txt"), files_EH)
+
+for j =1 : length(f_bmp)
 
       ind=ind+1
       im_EH=load(path2*files_EH[j])
@@ -71,7 +77,10 @@ for j =1 : Int(size(files_EH,1)/2)
       
 end
 
-for k =1 : Int(size(files_PA,1)/2)
+f_bmp=filter(x -> endswith(x, ".bmp"), files_PA)
+f_txt=filter(x -> endswith(x, ".txt"), files_PA)
+
+for k =1 : length(f_bmp)
       
       ind=ind+1
       im_PA=load(path3*files_PA[k])
@@ -86,8 +95,8 @@ for k =1 : Int(size(files_PA,1)/2)
       ymin=minimum(points[2,:]);
       ymax=maximum(points[2,:])
       im=im_PA[Int.(ymin:ymax),Int.(xmin:xmax)]
-      textures[ind]=Texture(3, im )
-      
+      textures[ind]=Texture(1, im )
+      textures[ind]=Texture(3,im_PA )
       
 end
 
